@@ -3,7 +3,7 @@ import express from 'express';
 import { createMovieRouter } from './routes/movies.js';
 import { MovieModel } from './models/local/movies.js';
 
-export const createapp = () => {
+export const createapp = ({ movieModel }) => {
 
     const app = express();
 
@@ -12,7 +12,7 @@ export const createapp = () => {
     const PORT = process.env.PORT ?? 3001;
 
     // Ejecutamos la función pasándole el modelo
-    app.use('/movies', createMovieRouter({ MovieModel }));
+    app.use('/movies', createMovieRouter({ MovieModel: movieModel }));
 
     app.listen(PORT, () => {
         console.log(`Servidor escuchando en http://localhost:${PORT}`);

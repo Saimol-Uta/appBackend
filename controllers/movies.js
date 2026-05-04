@@ -23,7 +23,9 @@ export class MovieController {
     create = async (req, res) => {
         const validation = validateMovie(req.body);
         if (!validation.success) {
-            return res.status(400).json({ error: JSON.parse(validation.error.errors) });
+            return res.status(400).json({
+                error: validation.error.issues
+            });
         }
         const newMovie = await this.movieModel.create({ input: validation.data });
         res.status(201).json(newMovie);
@@ -33,7 +35,7 @@ export class MovieController {
         const { id } = req.params;
         const validation = validatePartialMovie(req.body);
         if (!validation.success) {
-            return res.status(400).json({ error: JSON.parse(validation.error.errors) });
+            return res.status(400).json({ error: validation.error.issues });
         }
         const updatedMovie = await this.movieModel.update({
             id, input: validation.data

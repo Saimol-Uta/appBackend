@@ -1,5 +1,4 @@
-import { createapp } from "./app.js";
-import { createMovieRouter } from './routes/movies.js';
+import { createapp } from "./app";
 import { MovieModel } from './models/local/movies.js';
 
 createapp({ movieModel: MovieModel });

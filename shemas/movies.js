@@ -4,7 +4,7 @@ export const MovieSchema = z.object({
     title: z.string({
         invalid_type_error: 'Title must be a string',
         required_error: 'Title is required'
-    }),
+    }).min(1, 'Title cannot be empty'),
     year: z.number().int().min(1900).max(2050),
     director: z.string(),
     duration: z.number().int().positive(),
