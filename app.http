@@ -1,15 +1,25 @@
-###Obtener todas la peliculas
+@baseUrl = http://localhost:3001
+@validMovieId = 69f914629c3dfa49b90ea756
+@missingMovieId = 000000000000000000000000
+@invalidMovieId = dcdd0fad-a94c-4810-8acc-5f108d3b18c3
 
-GET http://localhost:3001/movies
+### Obtener todas las peliculas
+GET {{baseUrl}}/movies
 
-###Obtener una pelicula por su id
-GET http://localhost:3001/movies?genre=action
+### Filtrar por genero
+GET {{baseUrl}}/movies?genre=Comedy
 
-###Obtener una pelicula por id
-GET http://localhost:3001/movies/69ebdd1d703d0
+### Obtener una pelicula por id valido
+GET {{baseUrl}}/movies/{{validMovieId}}
 
-###Crear una pelicula
-POST http://localhost:3001/movies
+### Excepcion: id con formato invalido
+GET {{baseUrl}}/movies/{{invalidMovieId}}
+
+### Excepcion: id valido pero inexistente
+GET {{baseUrl}}/movies/{{missingMovieId}}
+
+### Crear una pelicula valida
+POST {{baseUrl}}/movies
 Content-Type: application/json
 
 {
@@ -21,9 +31,21 @@ Content-Type: application/json
     "genre": ["Adventure", "Comedy"]
 }
 
+### Excepcion: crear una pelicula invalida
+POST {{baseUrl}}/movies
+Content-Type: application/json
 
-###Actualizar una pelicula
-PATCH  http://localhost:3001/movies/69ebdd1d703d0
+{
+    "title": "",
+    "year": 1800,
+    "director": "John Doe",
+    "duration": -10,
+    "poster": "not-a-valid-url",
+    "genre": ["action"]
+}
+
+### Actualizar una pelicula valida
+PATCH {{baseUrl}}/movies/{{validMovieId}}
 Content-Type: application/json
 
 {
@@ -32,5 +54,27 @@ Content-Type: application/json
 
 }
 
-###Eliminar una pelicula
-DELETE http://localhost:3001/movies/69ebdd1d703d0
+### Excepcion: actualizar con id invalido
+PATCH {{baseUrl}}/movies/{{invalidMovieId}}
+Content-Type: application/json
+
+{
+    "title": "test"
+}
+
+### Excepcion: actualizar con id inexistente
+PATCH {{baseUrl}}/movies/{{missingMovieId}}
+Content-Type: application/json
+
+{
+    "title": "test"
+}
+
+### Eliminar una pelicula valida
+DELETE {{baseUrl}}/movies/{{validMovieId}}
+
+### Excepcion: eliminar con id invalido
+DELETE {{baseUrl}}/movies/{{invalidMovieId}}
+
+### Excepcion: eliminar con id inexistente
+DELETE {{baseUrl}}/movies/{{missingMovieId}}
