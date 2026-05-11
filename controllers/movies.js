@@ -6,7 +6,7 @@ export class MovieController {
     }
 
     handleMovieIdError = (error, res) => {
-        if (error?.name === 'CastError') {
+        if (error?.name === 'CastError' || error?.code === '22P02') {
             return res.status(400).json({ error: 'Invalid movie id' });
         }
 

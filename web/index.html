@@ -22,6 +22,7 @@
         fetch('http://localhost:3001/movies')
             .then(res => res.json())
             .then(movies => {
+                alert(JSON.stringify(movies))
                 const html = movies.map(movie => {
                     return `
                 <article data-id="${movie._id}">
@@ -39,6 +40,7 @@
                     if (e.target.matches('button')) {
                         const article = e.target.closest('article')
                         const id = article.dataset._id
+                        alert(id)
 
                         fetch(`http://localhost:3001/movies/${id}`, {
                             method: 'DELETE'

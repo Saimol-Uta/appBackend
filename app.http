@@ -1,7 +1,7 @@
 @baseUrl = http://localhost:3001
-@validMovieId = 69f914629c3dfa49b90ea756
-@missingMovieId = 000000000000000000000000
-@invalidMovieId = dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+@validMovieId = 123e4567-e89b-12d3-a456-426614174000
+@missingMovieId = 00000000-0000-0000-0000-000000000000
+@invalidMovieId = not-a-uuid
 
 ### Obtener todas las peliculas
 GET {{baseUrl}}/movies

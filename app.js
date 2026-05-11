@@ -1,20 +1,17 @@
 import express from 'express';
-// El nombre dentro de las llaves debe coincidir con el export const
 import { createMovieRouter } from './routes/movies.js';
-import { MovieModel } from './models/local/movies.js';
 import { corsMiddleware } from './middlewares/cors.js';
 
 export const createapp = ({ movieModel }) => {
 
     const app = express();
 
-    app.use(express.json()); // Middleware correcto
-    app.use(corsMiddleware()); // Middleware de CORS
-    app.disable('x-powered-by'); // Deshabilitar el encabezado X-Powered-By
+    app.use(express.json());
+    app.use(corsMiddleware());
+    app.disable('x-powered-by');
 
     const PORT = process.env.PORT ?? 3001;
 
-    // Ejecutamos la función pasándole el modelo
     app.use('/movies', createMovieRouter({ MovieModel: movieModel }));
 
     app.listen(PORT, () => {
