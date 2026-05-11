@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { trim } from "zod";
 
 const movieSchema = new mongoose.Schema({
     title: { type: String, required: [true, 'Title is required'], trim: true },
@@ -24,18 +23,16 @@ const movieSchema = new mongoose.Schema({
         required: [true, 'Poster is required'],
         match: [/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/, 'Poster must be a valid URL']
     },
-    genre: {
+    genre: [{
         type: String,
         required: [true, 'Genre is required'],
         enum: {
             values: ['Action', 'Adventure', 'Comedy', 'Drama', 'Crime', 'Horror', 'Sci-Fi', 'Fantasy', 'Thriller'],
             message: 'Genre must be one of the following: Action, Adventure, Comedy, Drama, Crime, Horror, Sci-Fi, Fantasy, Thriller'
         }
-    },
-    timestamp: {
-        type: Date,
-        default: Date.now
-    }
+    }],
+}, {
+    timestamps: true
 });
 
 export const Movie = mongoose.model('Movie', movieSchema);

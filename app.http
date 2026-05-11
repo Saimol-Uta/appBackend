@@ -13,7 +13,7 @@ POST http://localhost:3001/movies
 Content-Type: application/json
 
 {
-    "title": "",
+    "title": "Pillo",
     "year": 2020,
     "director": "John Doe",
     "duration": 120,
