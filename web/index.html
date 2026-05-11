@@ -22,10 +22,9 @@
         fetch('http://localhost:3001/movies')
             .then(res => res.json())
             .then(movies => {
-                alert(JSON.stringify(movies))
                 const html = movies.map(movie => {
                     return `
-                <article data-id="${movie._id}">
+                <article data-id="${movie.id ?? movie._id}">
                     <h2>${movie.title}</h2>
                     <img src="${movie.poster}" alt="${movie.title}">
                     <p>${movie.year}</p>
@@ -39,8 +38,7 @@
                 document.addEventListener('click', e => {
                     if (e.target.matches('button')) {
                         const article = e.target.closest('article')
-                        const id = article.dataset._id
-                        alert(id)
+                        const id = article.dataset.id
 
                         fetch(`http://localhost:3001/movies/${id}`, {
                             method: 'DELETE'
