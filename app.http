@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:3001
-@validMovieId = 123e4567-e89b-12d3-a456-426614174000
+@validMovieId = 67e5de6a-a5f8-4401-9188-1fe33987717f
 @missingMovieId = 00000000-0000-0000-0000-000000000000
 @invalidMovieId = not-a-uuid
 
@@ -9,26 +9,21 @@ GET {{baseUrl}}/movies
 ### Filtrar por genero
 GET {{baseUrl}}/movies?genre=Comedy
 
-### Obtener una pelicula por id valido
+### Obtener una pelicula 
 GET {{baseUrl}}/movies/{{validMovieId}}
 
-### Excepcion: id con formato invalido
-GET {{baseUrl}}/movies/{{invalidMovieId}}
-
-### Excepcion: id valido pero inexistente
-GET {{baseUrl}}/movies/{{missingMovieId}}
 
 ### Crear una pelicula valida
 POST {{baseUrl}}/movies
 Content-Type: application/json
 
 {
-    "title": "Pillo",
+    "title": "PilloBatman",
     "year": 2020,
     "director": "John Doe",
     "duration": 120,
-    "poster": "https://i.ebayimg.com/images/g/4goAAOSwMyBe7hnQ/s-l1200.webp",
-    "genre": ["Adventure", "Comedy"]
+    "poster": "https://i.ebayimg.com/images/g/yokAAOSw8w1YARbm/s-l1200.jpg",
+    "genre": ["Comedy"]
 }
 
 ### Excepcion: crear una pelicula invalida
@@ -49,7 +44,7 @@ PATCH {{baseUrl}}/movies/{{validMovieId}}
 Content-Type: application/json
 
 {
-    "title": "test",
+    "title": "testBat",
     "year": 2020
 
 }
@@ -73,8 +68,4 @@ Content-Type: application/json
 ### Eliminar una pelicula valida
 DELETE {{baseUrl}}/movies/{{validMovieId}}
 
-### Excepcion: eliminar con id invalido
-DELETE {{baseUrl}}/movies/{{invalidMovieId}}
 
-### Excepcion: eliminar con id inexistente
-DELETE {{baseUrl}}/movies/{{missingMovieId}}
