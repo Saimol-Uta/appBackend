@@ -4,7 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "node --watch app.js",
+        "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --passWithNoTests",
+        "test:watch": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --watch --passWithNoTests",
+        "test:cov": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --coverage --passWithNoTests",
         "dev": "nodemon app.js",
         "start:local": "nodemon server-db-local.js",
         "start:mongo": "nodemon server-db-mongo.js",
