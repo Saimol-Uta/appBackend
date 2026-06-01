@@ -25,6 +25,20 @@ const createMoviesTable = async () => {
     `);
 };
 
+// Dentro de config/dbpostgres.js, añade esta función arriba:
+const createUsersTable = async () => {
+    await pool.query(`
+        CREATE TABLE IF NOT EXISTS users (
+            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+            email TEXT UNIQUE NOT NULL,
+            password TEXT NOT NULL,
+            role TEXT NOT NULL DEFAULT 'user'
+        )
+    `);
+};
+
+
+
 const createDb = async () => {
     const retries = Number(process.env.POSTGRES_CONNECT_RETRIES ?? 10);
     const delayMs = Number(process.env.POSTGRES_CONNECT_DELAY_MS ?? 1000);
@@ -36,6 +50,7 @@ const createDb = async () => {
 
             try {
                 await createMoviesTable();
+                await createUsersTable();
                 console.log('PostgreSQL connected');
                 return pool;
             } finally {
@@ -55,6 +70,10 @@ const createDb = async () => {
     await pool.end().catch(() => { });
     process.exit(1);
 };
+
+
+
+
 
 export { pool };
 export default createDb;
